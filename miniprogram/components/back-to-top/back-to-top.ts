@@ -9,6 +9,11 @@ Component({
       value: false
     }
   },
+  data: {
+    icons: {
+      backToTop: getApp().globalData.baseIconPath + 'back_to_top_icon.png'
+    }
+  },
   methods: {
     // 回到顶部
     onPageScroll(e:any) {

@@ -4,7 +4,7 @@ var app = getApp();
 Page({
   
   data: {
-    records: [],          // 存储分页数据
+    records: [] as any[],          // 存储分页数据
     page: 1,              // 当前页码
     limit: 20,         // 每页条数
     noMoreData: false,     // 是否还有更多数据
@@ -53,16 +53,17 @@ Page({
         'content-type': 'application/json'
       },
       success: res => {
-        if (res.statusCode === 200 && res.data.code === 0) {
-          // console.log('data', res.data.data.records);
+        const data = res.data as Record<string, any>;
+        if (res.statusCode === 200 && data.code === 0) {
+          // console.log('data', data.data.records);
           
-          if(res.data.data.records.length === 0){
+          if(data.data.records.length === 0){
             this.setData({
               isLoading: false, 
               noMoreData: true
             });
           } else {
-            const newRecords = res.data.data.records.map(record => ({
+            const newRecords = data.data.records.map((record: any) => ({
               content: record.content,
               points: record.points,
               type: record.type,
@@ -78,7 +79,7 @@ Page({
               page: page
             });
 
-            if (res.data.data.records.length < this.data.limit) {
+            if (data.data.records.length < this.data.limit) {
               this.setData({
                 isLoading: false,
                 noMoreData: true

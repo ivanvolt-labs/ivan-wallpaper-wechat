@@ -20,7 +20,6 @@
   left: 0;
   width: 100%;
   height: 240rpx;
-  background-image: url('您的域名/files/wallpapers/thumbnail_19217602328b49debfdc60b00f4299b8.jpg');
   background-size: cover;
   background-position: initial;
   z-index: 98;

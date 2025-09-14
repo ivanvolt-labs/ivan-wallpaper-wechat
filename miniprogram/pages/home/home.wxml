@@ -1,10 +1,10 @@
 <view class="flex-center">
   <!-- 顶部 -->
   <view class="headers-top {{showTopTitle ? 'show' : 'hide'}}"></view>
-  <view class="headers-top-image {{showTopImage ? 'show' : 'hide'}}"></view>
+  <view class="headers-top-image {{showTopImage ? 'show' : 'hide'}}" style="background-image: url('{{headersBgImage}}');"></view>
   <view class="headers-title {{showTopTitle ? 'show' : 'hide'}}">青柠客壁纸</view>
   <view class="headers-search {{showTopTitle ? 'show' : 'hide'}}" bindtap="search">
-    <image class="headers-search-img" src="您的域名/files/icon/search_icon.png"></image>
+    <image class="headers-search-img" src="{{icons.search}}"></image>
     <view class="headers-search-text">找图</view>
   </view>
 
@@ -13,7 +13,7 @@
     <view class="r_box">添加至我的小程序，访问更快捷</view>
     <view style="font-size: 32rpx;margin-left: 8rpx;color: #f1ebcc;width:5rpx;">|</view>
     <view style="font-size: 24rpx;color: #f1ebcc">{{countdown}}秒后关闭</view>
-    <!-- <image style="width: 44rpx;height: 44rpx;" src="您的域名/files/icon/top_close_icon.png" bindtap="closeLead"></image> -->
+    <!-- <image style="width: 44rpx;height: 44rpx;" src="{{icons.topClose}}" bindtap="closeLead"></image> -->
   </view>
 
   <!-- 加载loading组件 -->
@@ -135,12 +135,12 @@
             <!-- 图片上的遮罩层 -->
             <!-- <view wx:if="{{showImageBottom}}" class="waterfall-image-bottom-box">
               <view class="waterfall-image-bottom-item-box">
-                <image class="waterfall-image-bottom-item-img" src="您的域名/files/icon/image_download_icon.png"></image>
+                <image class="waterfall-image-bottom-item-img" src="{{icons.imageDownload}}"></image>
                 <view>{{item.downloading}} 下载</view>
               </view>
               <view style="color:#949b9c;">|</view>
               <view class="waterfall-image-bottom-item-box">
-                <image class="waterfall-image-bottom-item-img" src="您的域名/files/icon/image_collect_icon.png"></image>
+                <image class="waterfall-image-bottom-item-img" src="{{icons.imageCollect}}"></image>
                 <view>{{item.bookmark}} 收藏</view>
               </view>
             </view> -->

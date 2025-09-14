@@ -55,16 +55,16 @@
   <view class="bottom-bar bottom-bar-animation {{animationClass}}">
     <!-- 收藏 -->
     <view class="bottom-box" bindtap="onFavorite">
-      <image wx:if="{{isCollect}}" class="bottom-item" src="您的域名/files/icon/collect_selected_icon.png"></image>
-      <image wx:else class="bottom-item" src="您的域名/files/icon/collect_icon.png"></image>
+      <image wx:if="{{isCollect}}" class="bottom-item" src="{{icons.collectSelected}}"></image>
+      <image wx:else class="bottom-item" src="{{icons.collect}}"></image>
     </view>
     <!-- 下载 -->
     <view class="button-border-cancas" bindtap="onDownload">
-      <image class="bottom-download" src="您的域名/files/icon/download_icon.png"></image>
+      <image class="bottom-download" src="{{icons.download}}"></image>
     </view>
     <!-- 分享 -->
     <button class="bottom-box" open-type="share" bindtap="onShare">
-        <image class="bottom-item" src="您的域名/files/icon/share_icon.png"></image>
+        <image class="bottom-item" src="{{icons.share}}"></image>
     </button>
   </view>
 
@@ -113,21 +113,21 @@
   <view class="image-info-box">
     <view style="margin-top: 20rpx;" class="image-info-item-box">
       <view class="info-item">
-        <image class="info-item-img" src="您的域名/files/icon/type_icon.png" />
+        <image class="info-item-img" src="{{icons.type}}" />
         <text>{{currentImage.type}}</text>
       </view>
       <view class="info-item">
-        <image class="info-item-img" src="您的域名/files/icon/dimensions_icon.png" />
+        <image class="info-item-img" src="{{icons.dimensions}}" />
         <text>{{currentImage.dimensions}}</text>
       </view>
     </view>
     <view class="image-info-item-box">
       <view class="info-item">
-        <image class="info-item-img" src="您的域名/files/icon/source_icon.png" />
+        <image class="info-item-img" src="{{icons.source}}" />
         <text>来自{{currentImage.source}}</text>
       </view>
       <view class="info-item">
-        <image class="info-item-img" src="您的域名/files/icon/time_icon.png" />
+        <image class="info-item-img" src="{{icons.time}}" />
         <text>{{currentImage.createTime}}</text>
       </view>
     </view>

@@ -1,6 +1,6 @@
 <view class="no-data-box flex-center">
   <view class="no-data-item-box">
-    <image class="no-data-img" src="您的域名/files/icon/nodata_icon.png"></image>
+    <image class="no-data-img" src="{{icons.nodata}}"></image>
   </view>
   <view wx:if="{{nodataValue != ''}}" style="display:flex;flex-flow:column;align-items:center;width:100%;height:100rpx;">
     <text class="no-data-text">没有找到"{{nodataValue}}"相关作品</text>

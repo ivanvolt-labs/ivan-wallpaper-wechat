@@ -65,11 +65,11 @@
 
   <!-- 轮播通告 -->
   <!-- <view wx:if="{{noticeShow}}" class='announcement"'>
-    <image style="width:44rpx;height:40rpx;margin-right:16rpx;" src="您的域名/files/icon/notice_icon.png"></image>
+    <image style="width:44rpx;height:40rpx;margin-right:16rpx;" src="{{icons.notice}}"></image>
     <view class='f-font24 s-32 announcement-context'>
       <view animation="{{animationData}}" class="f-font24 s-32 announcement-text f-text-left">{{announcementText}}</view>
     </view>
-    <image style="width:40rpx;height:40rpx;margin-left:25rpx;" src="您的域名/files/icon/close_icon.png" bindtap="closeNotice"></image>
+    <image style="width:40rpx;height:40rpx;margin-left:25rpx;" src="{{icons.close}}" bindtap="closeNotice"></image>
   </view> -->
 
   <!-- 中部菜单栏 -->
@@ -77,7 +77,7 @@
     <!-- qq群 -->
     <!-- <view class="flex-row-between menu-items">
       <view class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/qq_icon.png'></image>
+        <image class="menu-icon" src='{{icons.qq}}'></image>
         <view class="menu-title">QQ群</view>
       </view>
       <view class="menu-items-right" bindtap="copyQQGroup">
@@ -89,11 +89,10 @@
     <!-- 我的收藏 -->
     <view class="flex-row-between menu-items" bindtap="goCollect">
       <view class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/image_collect_icon.png'></image>
+        <image class="menu-icon" src='{{icons.collect}}'></image>
         <view class="menu-title">我的收藏</view>
       </view>
       <view class="menu-items-right">
-        <view class="menu-remake">数量: {{collectSum}}</view>
         <image class="menu-icon" src="{{arrows}}" />
       </view>
     </view>
@@ -101,7 +100,7 @@
     <!-- 常见问题 -->
     <!-- <view class="flex-row-between menu-items" bindtap="openCommonProblemsTab">
       <view class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/common_problems_icon.png'></image>
+        <image class="menu-icon" src='{{icons.commonProblems}}'></image>
         <view class="menu-title">常见问题</view>
       </view>
       <view class="menu-items-right">
@@ -114,7 +113,7 @@
     <view class="flex-row-between menu-items">
       <button class="transparent-button" open-type="contact" bindcontact="handleContact" session-from="sessionFrom">
         <view class="menu-items-left">
-          <image class="menu-icon" src='您的域名/files/icon/contact_icon.png'></image>
+          <image class="menu-icon" src='{{icons.contact}}'></image>
           <view class="menu-title">联系客服</view>
         </view>
       </button>
@@ -127,7 +126,7 @@
     <!-- 清理缓存 -->
     <!-- <view class="flex-row-between menu-items" bindtap="showClearCacheModal">
       <view class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/clear_cache_icon.png'></image>
+        <image class="menu-icon" src='{{icons.clearCache}}'></image>
         <view class="menu-title">清理缓存</view>
       </view>
       <view class="menu-items-right">
@@ -138,7 +137,7 @@
     <!-- 关联 -->
     <view class="flex-row-between menu-items" bindtap="openLinkRemake">
       <view style="width:300rpx;" class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/link_icon.png'></image>
+        <image class="menu-icon" src='{{icons.link}}'></image>
         <view class="menu-title">关联我们</view>
       </view>
       <view class="menu-items-right">
@@ -150,7 +149,7 @@
     <!-- 关于我们 -->
     <view class="flex-row-between menu-items" bindtap="openAboutTab">
       <view class="menu-items-left">
-        <image class="menu-icon" src='您的域名/files/icon/about_icon.png'></image>
+        <image class="menu-icon" src='{{icons.about}}'></image>
         <view class="menu-title">关于我们</view>
       </view>
       <view class="menu-items-right">
@@ -163,7 +162,7 @@
   <!-- 称号栏 下次大改版推出 -->
   <!-- <view class="bottom-box">
     <view class="days-record">
-      <image class="question-icon" src="您的域名/files/icon/question_icon.png"  bindtap="togglePopup"></image>
+      <image class="question-icon" src="{{icons.question}}"  bindtap="togglePopup"></image>
       <view>当前称号：</view>
       <view style="color:{{currentAccountColor}}">青柠侠</view>
     </view>

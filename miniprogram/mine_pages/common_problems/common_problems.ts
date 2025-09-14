@@ -4,6 +4,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 图标路径配置
+    icons: {
+      back: getApp().globalData.baseIconPath + 'back_icon.png',
+      bottom: getApp().globalData.baseIconPath + 'bottom_icon.png'
+    },
     faqList: [
       // {
       //   question: '青柠客壁纸是什么？',

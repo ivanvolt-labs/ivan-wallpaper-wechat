@@ -17,7 +17,14 @@ Page({
     sleft: 0,
     autoplay: false,
     loaded: false,
-    lueAvatar: app.globalData.baseIconPath + 'lue_avatar_icon.png'
+    lueAvatar: app.globalData.baseIconPath + 'lue_avatar_icon.png',
+    // 图标路径配置
+    icons: {
+      rank1: app.globalData.baseIconPath + '1.png',
+      rank2: app.globalData.baseIconPath + '2.png',
+      rank3: app.globalData.baseIconPath + '3.png',
+      more: app.globalData.baseIconPath + 'more.png'
+    }
   },
 
   /**
@@ -77,7 +84,7 @@ Page({
           let allRankImages = data.data || [];
 
           // 遍历每个 rankItem
-          allRankImages = allRankImages.map(rankItem => {
+          allRankImages = allRankImages.map((rankItem: any) => {
             // 构造全路径
             rankItem = app.generateFullFilePaths(rankItem);
 

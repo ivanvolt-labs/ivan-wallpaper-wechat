@@ -36,7 +36,16 @@ Page({
     currentIndex: 0,
     leadShow: true,
     countdown: 8,
-    hasInit: false
+    hasInit: false,
+    // 图标路径配置
+    icons: {
+      search: app.globalData.baseIconPath + 'search_icon.png',
+      topClose: app.globalData.baseIconPath + 'top_close_icon.png',
+      imageDownload: app.globalData.baseIconPath + 'image_download_icon.png',
+      imageCollect: app.globalData.baseIconPath + 'image_collect_icon.png'
+    },
+    // 背景图片路径
+    headersBgImage: app.globalData.baseImagePath + 'thumbnail_19217602328b49debfdc60b00f4299b8.jpg'
   },
 
   onLoad() {

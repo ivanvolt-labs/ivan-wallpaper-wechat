@@ -1,5 +1,5 @@
 <view class="back-arrow">
-  <image class="back-image" src="您的域名/files/icon/back_icon.png" bindtap="goBack"></image>
+  <image class="back-image" src="{{icons.back}}" bindtap="goBack"></image>
   <view style="color:#ccc8c8;font-size:36rpx;">|</view>
-  <image class="home-image" src="您的域名/files/icon/home_image_icon.png" bindtap="goHome"></image>
+  <image class="home-image" src="{{icons.home}}" bindtap="goHome"></image>
 </view>

@@ -11,7 +11,7 @@
     <!-- <view class="faq-item">
       <view class="faq-question" bindtap="toggleAnswer" bindtap="isOpenFirstQuestion">
         <text>为什么加载有时比较慢？</text>
-        <image class="toggle-icon" src="{{isOpen ? '您的域名/files/icon/back_icon.png' : '您的域名/files/icon/bottom_icon.png'}}"></image>
+        <image class="toggle-icon" src="{{isOpen ? icons.back : icons.bottom}}"></image>
       </view>
       <view class="faq-answer flex-column-start" wx:if="{{isOpen}}">
         <text>我们的壁纸资源均经过专业压缩技术处理，正常来说加载都是很快的。造成加载较慢的原因可能有以下几点：</text>
@@ -26,7 +26,7 @@
         <!-- 问题部分，点击后展开或收起答案 -->
         <view class="faq-question" bindtap="toggleAnswer" data-index="{{index}}">
           <text>{{item.question}}</text>
-          <image class="toggle-icon" src="{{item.isOpen ? '您的域名/files/icon/back_icon.png' : '您的域名/files/icon/bottom_icon.png'}}"></image>
+          <image class="toggle-icon" src="{{item.isOpen ? icons.back : icons.bottom}}"></image>
         </view>
 
         <!-- 答案部分，展开时显示 -->

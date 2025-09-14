@@ -6,7 +6,7 @@
   <back-arrow></back-arrow>
 
   <!-- 图片 -->
-  <image class="img" src="您的域名/files/icon/link_remake_icon.png"></image>
+  <image class="img" src="{{icons.linkRemake}}"></image>
 
   <!-- 说明 -->
   <view class="content flex-column-start">

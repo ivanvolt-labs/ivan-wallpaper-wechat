@@ -22,6 +22,17 @@ Page({
     isDownload: "0",
     imageOpacity: 1,
     isDownloadShow: false,
+    // 图标路径配置
+    icons: {
+      collectSelected: app.globalData.baseIconPath + 'collect_selected_icon.png',
+      collect: app.globalData.baseIconPath + 'collect_icon.png',
+      download: app.globalData.baseIconPath + 'download_icon.png',
+      share: app.globalData.baseIconPath + 'share_icon.png',
+      type: app.globalData.baseIconPath + 'type_icon.png',
+      dimensions: app.globalData.baseIconPath + 'dimensions_icon.png',
+      source: app.globalData.baseIconPath + 'source_icon.png',
+      time: app.globalData.baseIconPath + 'time_icon.png'
+    }
   },
 
   timer: 0,
@@ -156,7 +167,7 @@ Page({
 
   // 数据初始化
   isInit: function(userinfo:any, images:any, currentIndex:number, isDownload:string) {
-    const wallpapersIds = images.map(image => image.wallpapersId);
+    const wallpapersIds = images.map((image: any) => image.wallpapersId);
     // const currentIndex = this.data.currentIndex
     // console.log('wallpapersIds:' + JSON.stringify(wallpapersIds));
     
@@ -172,16 +183,25 @@ Page({
         'content-type': 'application/json',
         'Authorization': userinfo.accessToken
       },
-      success: async res => {
-        if (res.data.code === 0) {
+      success: async (res: any) => {
+        // 🔧 正确的类型处理
+        let data: any;
+        try {
+          data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+        } catch (e) {
+          console.error('Failed to parse response data:', e);
+          return;
+        }
+        
+        if (data?.code === 0) {
           // console.log('请求响应: ' + JSON.stringify(res.data));
           
-          const collectStatus = res.data.data;
+          const collectStatus = data.data;
           // const images = this.data.images;
 
           // 遍历图片列表，并检查每张图片是否被收藏
-          const updatedImages = images.map(image => {
-            const isCollect = collectStatus.some(item => item.wallpapersId === image.wallpapersId); // 比对收藏状态
+          const updatedImages = images.map((image: any) => {
+            const isCollect = collectStatus.some((item: any) => item.wallpapersId === image.wallpapersId); // 比对收藏状态
             const type = image.type;
             const modeType = type === '电脑平板' || type === '头像' ? 'aspectFit' : 'aspectFill';
             const loaded = false
@@ -211,7 +231,7 @@ Page({
           }
         } else {
           // console.error('Failed to fetch data:', res);
-          if(res.data.code == 401){
+          if(data?.code == 401){
             console.log('没有权限...');
             const today = new Date().toLocaleDateString(); // 当前日期
             try {
@@ -225,7 +245,7 @@ Page({
           }
         }
       },
-      fail: err => {
+      fail: (err: any) => {
         console.error('Request failed:', err);
       }
     });
@@ -256,9 +276,18 @@ Page({
           'content-type': 'application/json',
           'Authorization': this.data.userInfo.accessToken
         },
-        success: res => {
+        success: (res: any) => {
+          // 🔧 正确的类型处理
+          let data: any;
+          try {
+            data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+          } catch (e) {
+            console.error('Failed to parse response data:', e);
+            return;
+          }
+          
           // console.log('取消收藏: ' + JSON.stringify(res.data));
-          if (res.data.code === 0) {
+          if (data?.code === 0) {
             // 更新本地状态
             images[currentIndex].isCollect = false
             this.setData({
@@ -267,13 +296,13 @@ Page({
             });
           } else {
             wx.showToast({
-              title: res.data.msg,
+              title: data?.msg || '取消收藏失败',
               icon: 'error',
               duration: 2000
             })
           }
         },
-        fail: err => {
+        fail: (err: any) => {
           console.error('Request failed:', err);
         },
         complete: () => {
@@ -297,8 +326,17 @@ Page({
           'content-type': 'application/json',
           'Authorization': this.data.userInfo.accessToken
         },
-        success: res => {
-          if (res.data.code === 0) {
+        success: (res: any) => {
+          // 🔧 正确的类型处理
+          let data: any;
+          try {
+            data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+          } catch (e) {
+            console.error('Failed to parse response data:', e);
+            return;
+          }
+          
+          if (data?.code === 0) {
             // 更新本地状态
             images[currentIndex].isCollect = true
             this.setData({
@@ -307,13 +345,13 @@ Page({
             });
           } else {
             wx.showToast({
-              title: res.data.msg,
+              title: data?.msg || '添加收藏失败',
               icon: 'error',
               duration: 2000
             })
           }
         },
-        fail: err => {
+        fail: (err: any) => {
           console.error('Request failed:', err);
         },
         complete: () => {
@@ -346,7 +384,7 @@ Page({
 
     // 1. 检查是否已授权保存到相册
     wx.getSetting({
-      success(res) {
+      success(res: any) {
         // 如果没有授权，提示用户授权
         if (!res.authSetting['scope.writePhotosAlbum']) {
           wx.authorize({
@@ -361,7 +399,7 @@ Page({
                 title: '提示',
                 content: '请开启保存到相册的权限',
                 showCancel: false,
-                success: function (modalRes) {
+                success: function (modalRes: any) {
                   if (modalRes.confirm) {
                     wx.openSetting(); // 打开设置页面
                   }
@@ -385,7 +423,7 @@ Page({
 
     // 1. 检查是否已授权保存到相册
     wx.getSetting({
-      success(res) {
+      success(res: any) {
         // 如果没有授权，提示用户授权
         if (!res.authSetting['scope.writePhotosAlbum']) {
           wx.authorize({
@@ -400,7 +438,7 @@ Page({
                 title: '提示',
                 content: '请开启保存到相册的权限',
                 showCancel: false,
-                success: function (modalRes) {
+                success: function (modalRes: any) {
                   if (modalRes.confirm) {
                     wx.openSetting(); // 打开设置页面
                   }
@@ -451,7 +489,7 @@ Page({
     // 2. 下载图片到本地
     wx.downloadFile({
       url: filePath,
-      success(res) {
+      success(res: any) {
         if (res.statusCode === 200) {
           // 3. 保存图片到相册
           wx.saveImageToPhotosAlbum({
@@ -502,30 +540,51 @@ Page({
       method: 'POST',
       data: {
         uid: userInfo.id,
-        type: '2',
-        points: 1
+        type: '2'
       },
       header: {
         'Authorization': this.data.userInfo.accessToken,
         'content-type': 'application/json'
       },
-      success: res => {
-        const data = res.data as Record<string, any>;
-        if (res.statusCode === 200) {
-          console.log('数据: ' + JSON.stringify(data));
-          //设置缓存
+      success: (res: any) => {
+        // 🔧 正确的类型处理
+        let data: any;
+        try {
+          // 如果res.data是string类型，需要解析为JSON
+          data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+        } catch (e) {
+          console.error('Failed to parse response data:', e);
+          wx.showModal({
+            title: '数据解析失败',
+            content: '服务器响应格式异常',
+            showCancel: false
+          });
+          return;
+        }
+        
+        if (res.statusCode === 200 && data?.code === 0) {
+          // 扣费成功
           wx.setStorageSync('userInfo', data.data);
-
-          //更新数据
+          
           this.setData({
             userInfo: data.data
-          })
+          });
         } else {
-          console.error('Failed to fetch data:', res);
+          // 扣费失败，显示错误信息
+          wx.showModal({
+            title: '下载失败',
+            content: data?.msg || data?.message || '积分扣除失败',
+            showCancel: false
+          });
         }
       },
-      fail: err => {
+      fail: (err: any) => {
         console.error('Request failed:', err);
+        wx.showModal({
+          title: '网络异常',
+          content: '网络连接失败，请重试',
+          showCancel: false
+        });
       }
     });
   },

@@ -17,7 +17,13 @@ Page({
     selectFlag: '' as any,
     imageConut: 3,
     ifClear: false,
-    tagShow: true
+    tagShow: true,
+    // 图标路径配置
+    icons: {
+      search: app.globalData.baseIconPath + 'search_icon.png',
+      clear: app.globalData.baseIconPath + 'clear_icon.png',
+      preview: app.globalData.baseIconPath + 'preview_icon1.png'
+    }
   },
 
   onLoad(options: any) {

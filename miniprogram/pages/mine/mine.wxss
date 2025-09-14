@@ -12,8 +12,6 @@
   height: 520rpx;
   background-size: cover;
   background-position: top;
-  /* background-image: url('您的域名/files/backgroud/backgroud.jpg'); */
-  /* background-color: #E6A23C; */
   z-index: -1;
 }
 .headers-title{

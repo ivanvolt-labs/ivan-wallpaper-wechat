@@ -2,6 +2,11 @@ var app = getApp()
 
 Page({
   data: {
+    // 图标路径配置
+    icons: {
+      search: app.globalData.baseIconPath + 'search_icon.png',
+      clear: app.globalData.baseIconPath + 'clear_icon.png'
+    },
     categories: [
       {
         'value': '手机壁纸', 

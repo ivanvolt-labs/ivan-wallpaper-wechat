@@ -1,13 +1,20 @@
 App({
   globalData: {
-    baseURL: '您的域名',
+    baseURL: 'https://manager.putablecloth.com/',
+    // baseURL: 'http://127.0.0.1:8889',
     shareTitle: '青柠客壁纸｜手机换装必备，让颜值天花板触手可及',
-    baseIconPath: '您的域名/files/icon/',
-    baseBackgroudPath: '您的域名/files/backgroud/',
-    baseImagePath: '您的域名/files/wallpapers/',
+    get baseIconPath() {
+      return `${this.baseURL}/files/icon/`;
+    },
+    get baseBackgroudPath() {
+      return `${this.baseURL}/files/backgroud/`;
+    },
+    get baseImagePath() {
+      return `${this.baseURL}/files/wallpapers/`;
+    },
     thumbnailType: 'thumbnail_',
     previewType: 'preview_',
-    version: 'v3.5.4'
+    version: 'v3.5.6'
   },
 
   onShow: function () {

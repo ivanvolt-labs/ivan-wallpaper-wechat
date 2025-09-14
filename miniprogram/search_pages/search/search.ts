@@ -3,12 +3,18 @@ Page({
   data: {
     searchValue: '',
     ifClear: false,
-    searchHistory: [],
+    searchHistory: [] as string[],
     searchTags: ['视觉','抽象','创意','风景','自然','极简','生活','插画','美女','原生'],
     showRefreshIndicator: false,
     refreshText: '下拉刷新',
     loadingMore: false,
-    loadingText: '加载中...'
+    loadingText: '加载中...',
+    // 图标路径配置
+    icons: {
+      search: getApp().globalData.baseIconPath + 'search_icon.png',
+      clear: getApp().globalData.baseIconPath + 'clear_icon.png',
+      delete: getApp().globalData.baseIconPath + 'delete_icon.png'
+    }
   },
 
   onLoad() {
@@ -70,7 +76,7 @@ Page({
 
   // 更新搜索历史
   updateSearchHistory(query: string) {
-    let history = this.data.searchHistory;
+    let history: string[] = this.data.searchHistory;
     let isIncluded = this.data.searchTags.includes(query); // 判断是否在数组中
     //searchTags
     if (!isIncluded && !history.includes(query)) {

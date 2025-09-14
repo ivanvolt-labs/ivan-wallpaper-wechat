@@ -7,9 +7,9 @@
   <!-- 搜索 -->
   <!-- <view class="flex-row-between headers-search-box" bindtap="search">
     <view class="headers-search-item">
-      <image class="headers-search-img" src="您的域名/files/icon/search_icon.png"></image>
+      <image class="headers-search-img" src="{{icons.search}}"></image>
       <input class="headers-search-text" type="text" value="{{searchValue}}" placeholder="请输入关键字" bindinput="onInput" bindconfirm="onSearchConfirm" maxlength="16" disabled></input>
-      <image wx:if="{{searchValue.length > 0}}" class="headers-search-img" src="您的域名/files/icon/clear_icon.png" bindtap="clearSearchValue"></image>
+      <image wx:if="{{searchValue.length > 0}}" class="headers-search-img" src="{{icons.clear}}" bindtap="clearSearchValue"></image>
     </view>
     <view class="headers-search-button" bindtap="onSearchTap">搜索</view>
   </view> -->

@@ -16,8 +16,8 @@ Page({
     noticeShow: true,
     restartAnimation: null as any | null,
     copyText: '',
-    collectSum: 0,
-    downloadSum: 0,
+    // collectSum: 0,
+    // downloadSum: 0,
     arrows: app.globalData.baseIconPath + 'arrows_icon.png',
     qqGroup: '461368670',
     // daysElapsed: 1,
@@ -26,7 +26,20 @@ Page({
     currentAccountColor: '#eeeeee',
     remainingDays: 1,
     version: app.globalData.version,
-    isSignIn: false //是否签到
+    isSignIn: false, //是否签到
+    // 图标路径配置
+    icons: {
+      notice: app.globalData.baseIconPath + 'notice_icon.png',
+      close: app.globalData.baseIconPath + 'close_icon.png',
+      qq: app.globalData.baseIconPath + 'qq_icon.png',
+      collect: app.globalData.baseIconPath + 'image_collect_icon.png',
+      commonProblems: app.globalData.baseIconPath + 'common_problems_icon.png',
+      contact: app.globalData.baseIconPath + 'contact_icon.png',
+      clearCache: app.globalData.baseIconPath + 'clear_cache_icon.png',
+      link: app.globalData.baseIconPath + 'link_icon.png',
+      about: app.globalData.baseIconPath + 'about_icon.png',
+      question: app.globalData.baseIconPath + 'question_icon.png'
+    }
   },
 
   /**
@@ -47,7 +60,7 @@ Page({
         adUnitId: 'adunit-fe8f45d39a035cca',
       })
       videoAd.onLoad(() => {})
-      videoAd.onError((err) => {
+      videoAd.onError((err: any) => {
         console.error('激励视频光告加载失败', err)
       })
     }
@@ -199,8 +212,9 @@ Page({
         'content-type': 'application/json'
       },
       success: res => {
-        if (res.data.code === 0) {
-          const userInfo = res.data.data;
+        const data = res.data as Record<string, any>;
+        if (data.code === 0) {
+          const userInfo = data.data;
           this.setData({
             userInfo: userInfo
           });
@@ -208,7 +222,7 @@ Page({
           // 更新缓存
           wx.setStorageSync('userInfo', userInfo);
         } else {
-          console.error('Failed to fetch data:', res);
+          console.error('Failed to fetch data:', data);
         }
       },
       fail: err => {
@@ -248,11 +262,12 @@ Page({
       })
 
       //获取下载和收藏数量
-      this.selectActionCount(userInfo.id)
+      // this.selectActionCount(userInfo.id)
     }
   },
 
-  // 获取下载和收藏数量
+  // 获取下载和收藏数量 (已移除)
+  /*
   selectActionCount: function(uid:string) {
     wx.request({
       url: `${app.globalData.baseURL}/manager/v2/wallpaper/wechat/action/count`,
@@ -267,14 +282,12 @@ Page({
       success: res => {
         const data = res.data as Record<string, any>;
         if (res.statusCode === 200) {
-          // console.log('数据: ' + JSON.stringify(data));
-          
           this.setData({
             collectSum: data.data.collectSum,
             downloadSum: data.data.downloadSum
           });
         } else {
-          console.error('Failed to fetch data:', res);
+          console.error('Failed to fetch data:', data);
         }
       },
       fail: err => {
@@ -283,6 +296,7 @@ Page({
       }
     });
   },
+  */
 
   // 签到
   onSignIn: function(e:any) {
@@ -298,7 +312,7 @@ Page({
     const operation = e.currentTarget.dataset.operation;
     
     //增加积分
-    this.addPoints(uid, operation, 1)
+    this.addPoints(uid, operation)
   },
 
   // 分享
@@ -349,13 +363,13 @@ Page({
         // 失败重试
         videoAd.load()
           .then(() => videoAd.show())
-          .catch(err => {
+          .catch((err: any) => {
             console.error('激励视频 广告显示失败', err)
           })
       }),
   
       // 监听是否观看完视频
-      videoAd.onClose(res => {
+      videoAd.onClose((res: any) => {
         // 移除广告的监听器，防止重复触发
         videoAd.offClose();
   
@@ -363,7 +377,7 @@ Page({
         if (res && res.isEnded) {
           console.log('播放完成，可以获取青豆');
           // 正常播放结束，可以下发积分
-          this.addPoints(uid, operation, 3);
+          this.addPoints(uid, operation);
         } else {
           // 播放中途退出，不下发游戏奖励
           console.log('播放中途退出，不能获取青豆');
@@ -373,7 +387,7 @@ Page({
   },
 
   // 增加积分
-  addPoints(uid:string, operation:string, points:number){
+  addPoints(uid:string, operation:string){
     wx.showLoading({
       title: '处理中'
     });
@@ -384,8 +398,7 @@ Page({
       data: {
         uid: uid,
         type: '1',
-        operation: operation,
-        points: points
+        operation: operation
       },
       header: {
         'Authorization': this.data.userInfo.accessToken,
@@ -393,28 +406,50 @@ Page({
       },
       success: res => {
         const data = res.data as Record<string, any>;
-        if (res.statusCode === 200) {
-          // console.log('数据: ' + JSON.stringify(data));
-          //设置缓存
+        if (res.statusCode === 200 && data.code === 0) {
+          // 成功逻辑
           wx.setStorageSync('userInfo', data.data);
           if(operation == '1'){
             wx.setStorageSync('isSignIn', true);
           }
 
-          //更新数据
           this.setData({
             userInfo: data.data,
-            isSignIn: true
-          })
+            isSignIn: operation == '1' ? true : this.data.isSignIn
+          });
           
+          // 显示成功提示
+          let successMsg = '操作成功';
+          if(operation == '1') successMsg = '签到成功，获得1积分';
+          else if(operation == '2') successMsg = '分享成功，获得2积分';
+          else if(operation == '3') successMsg = '观看广告成功，获得3积分';
+          
+          wx.showToast({
+            title: successMsg,
+            icon: 'success'
+          });
         } else {
-          console.error('Failed to fetch data:', res);
+          // 服务端返回的错误信息
+          const errorMsg = (typeof data === 'object' && data !== null) 
+            ? (data.msg || data.message || '操作失败')
+            : '操作失败';
+            
+          wx.showModal({
+            title: '提示',
+            content: errorMsg,
+            showCancel: false
+          });
         }
         wx.hideLoading()
       },
       fail: err => {
         wx.hideLoading();
         console.error('Request failed:', err);
+        wx.showModal({
+          title: '网络异常',
+          content: '请检查网络连接后重试',
+          showCancel: false
+        });
       }
     });
   },
@@ -581,7 +616,7 @@ Page({
 
     if (lastShareRewardDate !== todayDate) {
       // 如果日期不是今天，给予奖励并更新缓存
-      this.addPoints(userInfo.id, '2', 2)
+      this.addPoints(userInfo.id, '2')
       wx.setStorageSync('lastShareRewardDate', todayDate);
     }
   }

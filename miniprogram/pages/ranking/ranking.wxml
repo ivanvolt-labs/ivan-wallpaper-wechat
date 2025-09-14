@@ -46,19 +46,19 @@
               <!-- 排行标识 -->
               <view class="image-wrapper">
                 <view wx:if="{{index==0}}" class="rank-box">
-                  <image class="rank-image" src="您的域名/files/icon/1.png" />
+                  <image class="rank-image" src="{{icons.rank1}}" />
                   <view style="color:#EEEEEE" class="rank-text">{{index+1}}</view>
                 </view>
                 <view wx:elif="{{index==1}}" class="rank-box">
-                  <image class="rank-image" src="您的域名/files/icon/2.png" />
+                  <image class="rank-image" src="{{icons.rank2}}" />
                   <view style="color:#2b2525" class="rank-text">{{index+1}}</view>
                 </view>
                 <view wx:elif="{{index==2}}" class="rank-box">
-                  <image class="rank-image" src="您的域名/files/icon/3.png" />
+                  <image class="rank-image" src="{{icons.rank3}}" />
                   <view style="color:#EEEEEE" class="rank-text">{{index+1}}</view>
                 </view>
                 <!-- <view wx:else class="rank-box">
-                  <image class="rank-image" src="您的域名/files/icon/more.png" />
+                  <image class="rank-image" src="{{icons.more}}" />
                   <view style="color:#EEEEEE" class="rank-text">{{index+1}}</view>
                 </view> -->
                 <!-- 图片  -->
