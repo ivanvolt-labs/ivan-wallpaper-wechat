@@ -13,9 +13,9 @@
 ## 📱 效果预览
 
 <p align="center">
-  <img src="docs/images/preview1.png" width="200" alt="首页预览">
-  <img src="docs/images/preview2.png" width="200" alt="分类预览">
-  <img src="docs/images/preview3.png" width="200" alt="详情预览">
+  <img src="miniprogram/images/demo/1.png" width="200" alt="首页预览">
+  <img src="miniprogram/images/demo/2.png" width="200" alt="分类预览">
+  <img src="miniprogram/images/demo/3.png" width="200" alt="详情预览">
 </p>
 
 ## 🛠️ 技术特点
@@ -96,7 +96,7 @@ globalData: {
 ## 💬 加入交流群
 
 <p align="center">
-  <img src="docs/images/wechat_group_qr.jpg" width="200" alt="微信交流群">
+  <img src="miniprogram/images/demo/qrcode.png" width="200" alt="微信交流群">
 </p>
 
 🎯 **为什么要加入我们？**
@@ -106,13 +106,7 @@ globalData: {
 - 参与项目开发，提升个人技术能力
 - 获取更多合作机会
 
-> 扫描上方二维码，添加作者微信，备注"GitHub"，即可加入交流群
-
-## 📞 联系方式
-
-- 作者：Ivan
-- 微信：JQB_999（备注：GitHub）
-- 邮箱：wallpaper_qnk@163.com
+> 扫描上方二维码，添加作者微信，备注"壁纸小程序"，即可加入交流群
 
 ## 📄 开源协议
 
@@ -129,3 +123,13 @@ globalData: {
 ---
 
 如果这个项目对你有帮助，欢迎 star 支持 ⭐️
+
+## ☕ 支持作者
+
+如果这个项目对你有所帮助，可以请我喝杯咖啡~
+
+<p align="center">
+  <a href="https://ko-fi.com/ivanvolt" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Buy Me a Coffee at ko-fi.com">
+  </a>
+</p>
