@@ -34,10 +34,12 @@ git clone https://github.com/ivanvolt-labs/ivan-wallpaper-wechat.git
 cd ivan-wallpaper-wechat
 ```
 
-### 2. 安装依赖
+### 2. 安装依赖（可选）
 ```bash
 npm install
 ```
+此步骤为可选。如果仅使用微信开发者工具开发，可以跳过此步骤。
+安装依赖可以获得更好的 TypeScript 类型提示和代码智能补全。
 
 ### 3. 配置项目
 
