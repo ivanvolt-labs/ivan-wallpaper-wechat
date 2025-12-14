@@ -12,7 +12,7 @@
 
 ## 📱 效果预览
 
-<p align="center">
+<p>
   <img src="miniprogram/images/demo/1.png" width="200" alt="首页预览">
   <img src="miniprogram/images/demo/2.png" width="200" alt="分类预览">
   <img src="miniprogram/images/demo/3.png" width="200" alt="详情预览">
@@ -95,7 +95,7 @@ globalData: {
 
 ## 💬 加入交流群
 
-<p align="center">
+<p>
   <img src="miniprogram/images/demo/qrcode.png" width="200" alt="微信交流群">
 </p>
 
