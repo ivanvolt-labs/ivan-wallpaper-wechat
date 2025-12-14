@@ -27,6 +27,7 @@ Page({
     remainingDays: 1,
     version: app.globalData.version,
     isSignIn: false, //是否签到
+    defaultAvatar: 'https://img.putablecloth.com/wallpapers/system/default_avatar.png', // 默认头像
     // 图标路径配置
     icons: {
       notice: app.globalData.baseIconPath + 'notice_icon.png',
@@ -156,50 +157,127 @@ Page({
   onChooseAvatar(e:any) {
     const avatar = e.detail.avatarUrl;
 
+    wx.showLoading({
+      title: '上传中...'
+    });
+
     // 上传头像到服务器
     wx.uploadFile({
-      url: `${app.globalData.baseURL}/manager/v2/wallpaper/wechat/avatar`, // 修改为头像上传的接口
-      filePath: avatar, // 上传文件的路径
-      name: 'file', // 上传文件的字段名
+      url: `${app.globalData.baseURL}/manager/v2/wallpaper/wechat/avatar`,
+      filePath: avatar,
+      name: 'file',
       formData: {
-        uid: this.data.userInfo.id // 可以传递用户ID等附加数据
+        uid: this.data.userInfo.id
       },
       header: {
         'Authorization': this.data.userInfo.accessToken
       },
       success: (uploadRes) => {
-        const resData = JSON.parse(uploadRes.data);
-        console.log('res:' + JSON.stringify(uploadRes.data));
-        
-        if (resData.code === 0) {
-          // 请求成功，更新用户信息
-          const userInfo = resData.data;
-          this.setData({
-            userInfo: userInfo
-          });
+        wx.hideLoading();
 
-          // 更新缓存中的用户信息
-          wx.setStorageSync('userInfo', userInfo);
-        } else {
-          console.error('Failed to upload avatar:', resData);
+        try {
+          const resData = JSON.parse(uploadRes.data);
+          console.log('头像上传响应:', resData);
+
+          if (resData.code === 0 && resData.data) {
+            const userInfo = resData.data;
+
+            // 确保头像字段存在且为字符串
+            if (userInfo && userInfo.avatar) {
+              this.setData({
+                userInfo: userInfo
+              });
+
+              // 更新缓存中的用户信息
+              wx.setStorageSync('userInfo', userInfo);
+
+              wx.showToast({
+                title: '头像更新成功',
+                icon: 'success'
+              });
+            } else {
+              console.error('头像数据格式错误:', userInfo);
+              wx.showToast({
+                title: '头像数据异常',
+                icon: 'none'
+              });
+            }
+          } else {
+            wx.showToast({
+              title: resData.msg || '上传失败',
+              icon: 'none'
+            });
+          }
+        } catch (error) {
+          console.error('解析上传响应失败:', error);
+          wx.showToast({
+            title: '数据解析失败',
+            icon: 'none'
+          });
         }
       },
       fail: (err) => {
-        console.error('Upload failed:', err);
+        wx.hideLoading();
+        console.error('头像上传失败:', err);
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none'
+        });
       }
     });
   },
 
-  // 处理昵称输入
-  onInputChange(e:any) {
-    const nickname = e.detail.value
-    if(nickname == null || nickname == ''){
-      wx.showModal({
-        title: '昵称还没设置哦'
-      })
-    }
+  // 头像加载错误处理
+  onAvatarError(e: any) {
+    console.error('头像加载失败:', e.detail);
+    // 如果头像加载失败，使用默认头像
+    this.setData({
+      'userInfo.avatar': this.data.defaultAvatar
+    });
+  },
 
-    // 请求替换昵称
+  // 显示编辑昵称弹窗
+  showEditNicknameModal() {
+    const currentNickname = this.data.userInfo.nickname || '';
+
+    wx.showModal({
+      title: '修改昵称',
+      editable: true,
+      placeholderText: '请输入昵称',
+      content: currentNickname,
+      success: (res) => {
+        if (res.confirm) {
+          const nickname = res.content?.trim();
+
+          if (!nickname || nickname === '') {
+            wx.showToast({
+              title: '昵称不能为空',
+              icon: 'none'
+            });
+            return;
+          }
+
+          if (nickname === currentNickname) {
+            wx.showToast({
+              title: '昵称未修改',
+              icon: 'none'
+            });
+            return;
+          }
+
+          // 请求替换昵称
+          this.updateNickname(nickname);
+        }
+      }
+    });
+  },
+
+  // 更新昵称
+  updateNickname(nickname: string) {
+    wx.showLoading({
+      title: '更新中...'
+    });
+
     wx.request({
       url: `${app.globalData.baseURL}/manager/v2/wallpaper/wechat/nickname`,
       method: 'POST',
@@ -212,21 +290,36 @@ Page({
         'content-type': 'application/json'
       },
       success: res => {
+        wx.hideLoading();
         const data = res.data as Record<string, any>;
+
         if (data.code === 0) {
           const userInfo = data.data;
           this.setData({
             userInfo: userInfo
           });
-      
+
           // 更新缓存
           wx.setStorageSync('userInfo', userInfo);
+
+          wx.showToast({
+            title: '昵称修改成功',
+            icon: 'success'
+          });
         } else {
-          console.error('Failed to fetch data:', data);
+          wx.showToast({
+            title: data.msg || '修改失败',
+            icon: 'none'
+          });
         }
       },
       fail: err => {
+        wx.hideLoading();
         console.error('Request failed:', err);
+        wx.showToast({
+          title: '网络异常',
+          icon: 'none'
+        });
       }
     });
   },

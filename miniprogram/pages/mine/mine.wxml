@@ -8,12 +8,12 @@
   <view class="header">
     <!-- 昵称头像栏 -->
     <view class="userinfo-box">
-      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-        <image class="avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar" hover-class="none">
+        <image class="avatar" src="{{userInfo.avatar || defaultAvatar}}" mode="aspectFill" binderror="onAvatarError"></image>
       </button>
       <view class="user-info">
         <view style="display:flex;align-items:center;height:60rpx;">
-          <input type="nickname" class="name" bind:change="onInputChange" readonly value="{{userInfo.nickname}}"></input>
+          <view class="name" bindtap="showEditNicknameModal">{{userInfo.nickname || '点击设置昵称'}}</view>
         </view>
         <view style="display:flex;align-items:center;height:60rpx;">
           <view class="uid">UID: {{userInfo.id}}</view>

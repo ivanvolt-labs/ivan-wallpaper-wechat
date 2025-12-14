@@ -1,0 +1,33 @@
+# 包含敏感配置的文件
+miniprogram/app.ts
+project.config.json
+project.private.config.json
+
+# 微信开发者工具
+.DS_Store
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 云开发
+.cloudbase/
+
+# 编译输出
+dist/
+build/
+
+# 日志
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 系统文件
+Thumbs.db

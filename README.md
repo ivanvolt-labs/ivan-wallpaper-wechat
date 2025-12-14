@@ -28,18 +28,61 @@
 
 ## 🚀 快速开始
 
-1. 克隆项目
-bash
-git clone https://github.com/your-username/qingningke-wxapp.git
+### 1. 克隆项目
+```bash
+git clone https://github.com/ivanvolt-labs/ivan-wallpaper-wechat.git
+cd ivan-wallpaper-wechat
+```
 
-2. 安装依赖
-bash
+### 2. 安装依赖
+```bash
 npm install
+```
 
+### 3. 配置项目
 
-3. 使用微信开发者工具打开项目
+#### 3.1 复制配置文件
+```bash
+# 复制小程序配置文件
+cp miniprogram/app.example.ts miniprogram/app.ts
 
-4. 编译运行
+# 复制项目配置文件
+cp project.config.example.json project.config.json
+```
+
+#### 3.2 修改服务器配置
+
+打开 `miniprogram/app.ts`，修改以下配置为你自己的服务器信息：
+
+```typescript
+globalData: {
+  baseURL: 'https://your-api-server.com',        // 修改为你的API服务器地址
+  imgURL: 'https://your-img-server.com/wallpapers', // 修改为你的图片服务器地址
+  shareTitle: '你的小程序名称',                    // 修改为你的小程序名称
+  version: 'v1.0.0'                               // 修改为你的版本号
+}
+```
+
+#### 3.3 修改小程序AppID
+
+打开 `project.config.json`，修改以下配置：
+
+```json
+{
+  "appid": "your-wechat-miniprogram-appid"  // 修改为你的微信小程序AppID
+}
+```
+
+### 4. 使用微信开发者工具打开项目
+
+- 打开微信开发者工具
+- 选择"导入项目"
+- 选择项目目录
+- 填写AppID（与 `project.config.json` 中配置的一致）
+
+### 5. 编译运行
+
+在微信开发者工具中点击"编译"即可预览小程序
 
 ## 🤝 参与贡献
 
