@@ -3,14 +3,30 @@ miniprogram/app.ts
 project.config.json
 project.private.config.json
 
-# 微信开发者工具
-.DS_Store
-
 # Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# 系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 日志
+logs/
+*.log
 
 # 云开发
 .cloudbase/
@@ -19,15 +35,15 @@ yarn-error.log*
 dist/
 build/
 
-# 日志
-logs/
-*.log
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
+# 覆盖率
+coverage/
 
-# 系统文件
-Thumbs.db
+# 临时文件
+tmp/
+temp/

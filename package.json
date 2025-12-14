@@ -6,9 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "",
-  "dependencies": {
-    "@lspriv/wx-calendar": "^1.7.3-alpha.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "miniprogram-api-typings": "^3.12.3",
     "typescript": "^5.5.4"
